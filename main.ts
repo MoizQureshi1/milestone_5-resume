@@ -104,22 +104,23 @@ document.getElementById('resumeForm')?.addEventListener('submit', function(event
 
 
             // Add shareable Link Button
+            // Replace old Share Link button code
             const shareLinkButton = document.createElement("button");
-            shareLinkButton.textContent = "Copy Shareable Link";
-            shareLinkButton.addEventListener("click", async() =>{
-                try {
-                    // Create a unique shareable Link
-                    const shareableLink = `https://yourdomain.com/resumes/${name.replace(/\s+/g, '_')}_cv.html`;
+            shareLinkButton.textContent = "Copy Temporary Link";
+            shareLinkButton.addEventListener("click", async () => {
+            const blob = new Blob([resumeOutPut], { type: "text/html" });
+            const blobURL = URL.createObjectURL(blob);
 
-                    // Use clipboard API to copy the shareable the Link
-                    await navigator.clipboard.writeText(shareableLink);
-                    alert("shareableLink copy to clipborad!");
-                }catch (err) {
-                    console.error("Faild to copy Link: ", err);
-                    alert("Failed to copy link to clipboard, Please try again.");
+                try {
+                await navigator.clipboard.writeText(blobURL);
+                alert("Temporary link copied to clipboard!");
+                } catch (err) {
+                console.error("Failed to copy link:", err);
+                alert("Failed to copy temporary link.");
                 }
-            });
-            buttonsContainer.appendChild(shareLinkButton);
+        });
+        buttonsContainer.appendChild(shareLinkButton);
+
     }else{
         console.error("Resume output container not found");
     }
