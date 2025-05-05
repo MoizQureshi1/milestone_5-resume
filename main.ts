@@ -91,12 +91,17 @@ document.getElementById('resumeForm')?.addEventListener('submit', function(event
             resumeOutPutElement?.appendChild(buttonsContainer);
 
             // Add diwnload PDF button
-            const downloadButton = document.createElement("button")
-            downloadButton.textContent = "Download as PDF";
-            downloadButton.addEventListener("click", () => {
-                window.print(); // Open the print dailog, allowing the user to save as PDF.
+            const downloadHTMLButton = document.createElement("button");
+            downloadHTMLButton.textContent = "Download as HTML";
+            downloadHTMLButton.addEventListener("click", () => {
+            const blob = new Blob([resumeOutPut], { type: "text/html" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = `${username.replace(/\s+/g, '_')}_cv.html`;
+            link.click();
             });
-            buttonsContainer.appendChild(downloadButton);
+            buttonsContainer.appendChild(downloadHTMLButton);
+
 
             // Add shareable Link Button
             const shareLinkButton = document.createElement("button");

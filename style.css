@@ -236,3 +236,26 @@ button:hover{
         font-size: 15px;
     }
 }
+
+
+@media print {
+    body * {
+      visibility: hidden;
+    }
+  
+    #resumeOutPut, #resumeOutPut * {
+      visibility: visible;
+    }
+  
+    #resumeOutPut {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+  
+    #buttonsContainer {
+      display: none !important;
+    }
+  }
+  
